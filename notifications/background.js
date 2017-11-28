@@ -62,7 +62,6 @@ if (window.Notification) {
                 hasMore = true;
               }
             }
-            console.log(lidata);
           });
           // alert(hasMore);
           if (hasMore) {
