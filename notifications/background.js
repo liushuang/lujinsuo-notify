@@ -22,6 +22,7 @@ if (!localStorage.isInitialized) {
   localStorage.isActivated = true;   // The display activation.
   localStorage.frequency = 1;        // The display frequency, in minutes.
   localStorage.isInitialized = true; // The option initialization.
+  localStorage.onlySearchplus = true;
 }
 
 // Test for notification support.
@@ -46,11 +47,22 @@ if (window.Notification) {
           $(data).find(".product-rows-item").each(function(i,lidata){
             var lidata = $(lidata);
             var progress = $(lidata).find(".progress-txt").html();
+            var title = $(lidata).find(".product-title").html();
             //alert(progress);
             var button = $(lidata).find(".ld-btn").html();
-            if( progress != "100%" && button == "投资"){
-              hasMore = true;
+            var onlyAne = JSON.parse(localStorage.onlySearchplus);
+            if (onlyAne) {
+              if (title.indexOf("稳盈-安e+") >= 0) {
+                if (progress != "100%" && button == "投资") {
+                  hasMore = true;
+                }
+              }
+            }else{
+              if (progress != "100%" && button == "投资") {
+                hasMore = true;
+              }
             }
+            console.log(lidata);
           });
           // alert(hasMore);
           if (hasMore) {
